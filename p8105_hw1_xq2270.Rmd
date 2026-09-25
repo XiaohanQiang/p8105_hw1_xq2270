@@ -2,29 +2,37 @@
 title: "p8105_hw1"
 author: "Xiaohan Qiang"
 date: "2026-09-25"
-output: html_document
+output: github_document
 ---
+#problem1
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r}
+data("penguins", package = "palmerpenguins")
+head(penguins)
+library(ggplot2)
 ```
+The penguins dataset contains `r nrow(penguins)` observations
+and `r ncol(penguins)` variables.
+The penguins dataset includes three penguin species:Adelie, Chinstrap and Gentoo. from three different island includes Biscoe, Dream and Torgersen.
+Important variables include bill length (mm), bill depth(mm), flipper length(mm), body mass(g), sex, and year.
+The mean flipper length is
+`r round(mean(penguins$flipper_length_mm, na.rm = TRUE), 2)` mm.
 
-## R Markdown
+```{r}
+penguin_plot = ggplot(
+  penguins,
+  aes(x = bill_length_mm, y = flipper_length_mm, color = species)
+) +
+  geom_point(na.rm = TRUE)
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+penguin_plot
 ```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+Two observations with missing values in the plotting variables were excluded from the scatterplot.
+```{r}
+ggsave(
+  filename = "penguins_scatterplot.png",
+  plot = penguin_plot,
+  width = 7,
+  height = 5
+)
 ```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

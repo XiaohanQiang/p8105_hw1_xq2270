@@ -36,3 +36,39 @@ ggsave(
   height = 5
 )
 ```
+
+#problem2
+
+```{r}
+set.seed(123)
+
+hw2_df = tibble::tibble(
+  random_sample = rnorm(10),
+  positive = random_sample > 0,
+  character_vector = letters[1:10],
+  factor_vector = factor(
+    rep(c("low", "medium", "high"), length.out = 10)
+  )
+)
+
+hw2_df
+```
+```{r}
+mean(hw2_df$random_sample)
+mean(hw2_df$positive)
+mean(hw2_df$character_vector)
+mean(hw2_df$factor_vector)
+```
+The mean of the numeric variable can be directly calculate. 
+The mean of the logic variable means the proportion of TRUE value. That's because R treats TRUE as 1 and FALSE as 0 while calculate the mean value.
+The character and factor variables return NA with warnings because their means are not defined.
+
+```{r results='hide'}
+as.numeric(hw2_df$positive)
+as.numeric(hw2_df$character_vector)
+as.numeric(hw2_df$factor_vector)
+```
+Converting the logical variable to numeric changes TRUE to 1 and FALSE to 0.
+Converting the character variable to numeric produces NA values and a warning because its strings cannot be interpreted as numbers.
+Converting the factor variable to numeric returns the integer codes of its levels rather than meaningful numerical values.
+Therefore, numeric conversion does not necessarily make a variavle suitable for calculating a mean.

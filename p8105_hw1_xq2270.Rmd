@@ -4,9 +4,9 @@ author: "Xiaohan Qiang"
 date: "2026-09-25"
 output: github_document
 ---
-# problem1
+# problem 1
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 data("penguins", package = "palmerpenguins")
 head(penguins)
 library(ggplot2)
@@ -37,7 +37,7 @@ ggsave(
 )
 ```
 
-# problem2
+# problem 2
 
 ```{r}
 set.seed(123)
@@ -63,7 +63,7 @@ The mean of the numeric variable can be directly calculate.
 The mean of the logic variable means the proportion of TRUE value. That's because R treats TRUE as 1 and FALSE as 0 while calculate the mean value.
 The character and factor variables return NA with warnings because their means are not defined.
 
-```{r results='hide'}
+```{r results='hide', warning=FALSE}
 as.numeric(hw2_df$positive)
 as.numeric(hw2_df$character_vector)
 as.numeric(hw2_df$factor_vector)
@@ -71,4 +71,4 @@ as.numeric(hw2_df$factor_vector)
 Converting the logical variable to numeric changes TRUE to 1 and FALSE to 0.
 Converting the character variable to numeric produces NA values and a warning because its strings cannot be interpreted as numbers.
 Converting the factor variable to numeric returns the integer codes of its levels rather than meaningful numerical values.
-Therefore, numeric conversion does not necessarily make a variavle suitable for calculating a mean.
+Therefore, numeric conversion does not necessarily make a variable suitable for calculating a mean.
